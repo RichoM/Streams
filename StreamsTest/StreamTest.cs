@@ -145,5 +145,14 @@ namespace StreamsTest
             stream.Next(5); // Discard the first half
             Assert.IsTrue(stream.Next(10).SequenceEqual(new int[5] { 6, 7, 8, 9, 10 }));
         }
+
+        [TestMethod]
+        public void StreamsCanUseIOStreamsAsSource()
+        {
+            byte[] bytes = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            System.IO.MemoryStream iostream = new System.IO.MemoryStream(bytes);
+            Stream<byte> stream = new IOStream(iostream);
+            Assert.IsTrue(bytes.SequenceEqual(stream.UpToEnd()));
+        }
     }
 }
