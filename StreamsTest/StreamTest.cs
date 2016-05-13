@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Streams;
-using System.Text;
 
 namespace StreamsTest
 {
@@ -146,29 +145,5 @@ namespace StreamsTest
             stream.Next(5); // Discard the first half
             Assert.IsTrue(stream.Next(10).SequenceEqual(new int[5] { 6, 7, 8, 9, 10 }));
         }
-
-        [TestMethod]
-        public void TextStreamsCanUseIOStreamsAsSource()
-        {
-            byte[] bytes = Encoding.Default.GetBytes("ABC");
-            System.IO.MemoryStream iostream = new System.IO.MemoryStream(bytes);
-            TextStream stream = new TextStream(iostream);
-            Assert.AreEqual('A', stream.Next());
-            Assert.AreEqual('B', stream.Next());
-            Assert.AreEqual('C', stream.Next());
-            Assert.IsTrue(stream.AtEnd);
-        }
-
-        [TestMethod]
-        public void TextStreamsCanAlsoUseTextReadersAsSource()
-        {
-            System.IO.TextReader reader = new System.IO.StringReader("ABC");
-            TextStream stream = new TextStream(reader);
-            Assert.AreEqual('A', stream.Next());
-            Assert.AreEqual('B', stream.Next());
-            Assert.AreEqual('C', stream.Next());
-            Assert.IsTrue(stream.AtEnd);
-        }
-        
     }
 }

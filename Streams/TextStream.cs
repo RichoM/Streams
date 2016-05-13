@@ -19,6 +19,9 @@ namespace Streams
             : this(new System.IO.StreamReader(iostream, encoding ?? Encoding.Default))
         {}
 
+        public TextStream(string source) : this(new System.IO.StringReader(source))
+        {}
+
         private static IEnumerable<char> AsEnumerable(System.IO.TextReader reader)
         {
             string line;
@@ -35,10 +38,31 @@ namespace Streams
         {
             return new string(base.UpToEnd().ToArray());
         }
+        
+        public new string UpTo(Func<char, bool> condition)
+        {
+            StringBuilder sb = new StringBuilder();
+            char next;
+            while (!AtEnd && !condition(next = Next()))
+            {
+                sb.Append(next);
+            }
+            return sb.ToString();
+        }
+
+        public new string UpTo(char element)
+        {
+            return UpTo((each) => Equals(element, each));
+        }
+
+        public new string Next(int count)
+        {
+            return new string(base.Next(count).ToArray());
+        }
 
         public void Dispose()
         {
-            reader.Dispose();
+            if (reader != null) { reader.Dispose(); }
         }
     }
 }
