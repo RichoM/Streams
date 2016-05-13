@@ -148,21 +148,27 @@ namespace StreamsTest
         }
 
         [TestMethod]
-        public void StreamsCanUseIOStreamsAsSource()
+        public void TextStreamsCanUseIOStreamsAsSource()
         {
-            string text = "Richo capo";
-            byte[] bytes = Encoding.Default.GetBytes(text);            
+            byte[] bytes = Encoding.Default.GetBytes("ABC");
             System.IO.MemoryStream iostream = new System.IO.MemoryStream(bytes);
             TextStream stream = new TextStream(iostream);
-            Assert.AreEqual(text, stream.UpToEnd());
+            Assert.AreEqual('A', stream.Next());
+            Assert.AreEqual('B', stream.Next());
+            Assert.AreEqual('C', stream.Next());
+            Assert.IsTrue(stream.AtEnd);
         }
 
         [TestMethod]
-        public void StreamsCanAlsoUseTextReadersAsSource()
+        public void TextStreamsCanAlsoUseTextReadersAsSource()
         {
-            System.IO.TextReader reader = new System.IO.StringReader("Richo capo");
+            System.IO.TextReader reader = new System.IO.StringReader("ABC");
             TextStream stream = new TextStream(reader);
-            Assert.AreEqual("Richo capo", stream.UpToEnd());
+            Assert.AreEqual('A', stream.Next());
+            Assert.AreEqual('B', stream.Next());
+            Assert.AreEqual('C', stream.Next());
+            Assert.IsTrue(stream.AtEnd);
         }
+        
     }
 }
