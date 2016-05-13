@@ -32,6 +32,12 @@ namespace Streams
             return result;
         }
 
+        public T Peek()
+        {
+            if (AtEnd) return default(T);
+            return source.Current;
+        }
+
         public IEnumerable<T> Next(int count)
         {
             List<T> result = new List<T>();
@@ -41,12 +47,6 @@ namespace Streams
                 result.Add(Next());
             }
             return result;
-        }
-
-        public T Peek()
-        {
-            if (AtEnd) return default(T);
-            return source.Current;
         }
 
         public IEnumerable<T> UpTo(Func<T, bool> condition)
