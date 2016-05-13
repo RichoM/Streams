@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Streams;
+using System.Text;
 
 namespace StreamsTest
 {
@@ -149,10 +150,19 @@ namespace StreamsTest
         [TestMethod]
         public void StreamsCanUseIOStreamsAsSource()
         {
-            byte[] bytes = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            string text = "Richo capo";
+            byte[] bytes = Encoding.Default.GetBytes(text);            
             System.IO.MemoryStream iostream = new System.IO.MemoryStream(bytes);
-            Stream<byte> stream = new IOStream(iostream);
-            Assert.IsTrue(bytes.SequenceEqual(stream.UpToEnd()));
+            TextStream stream = new TextStream(iostream);
+            Assert.AreEqual(text, stream.UpToEnd());
+        }
+
+        [TestMethod]
+        public void StreamsCanAlsoUseTextReadersAsSource()
+        {
+            System.IO.TextReader reader = new System.IO.StringReader("Richo capo");
+            TextStream stream = new TextStream(reader);
+            Assert.AreEqual("Richo capo", stream.UpToEnd());
         }
     }
 }
