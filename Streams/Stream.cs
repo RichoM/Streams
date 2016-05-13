@@ -9,13 +9,13 @@ namespace Streams
     public class Stream<T>
     {
         private IEnumerator<T> source;
-        private int position = 0;
+        private int position = -1;
         private bool atEnd = false;
 
         public Stream(IEnumerator<T> source)
         {
             this.source = source;
-            atEnd = !source.MoveNext();
+            Advance();
         }
 
         public Stream(IEnumerable<T> source) : this(source.GetEnumerator()) { }
@@ -27,8 +27,7 @@ namespace Streams
         {
             if (AtEnd) return default(T);
             T result = source.Current;
-            atEnd = !source.MoveNext();
-            position++;
+            Advance();
             return result;
         }
 
@@ -36,6 +35,17 @@ namespace Streams
         {
             if (AtEnd) return default(T);
             return source.Current;
+        }
+
+        public void Skip()
+        {
+            if (AtEnd) return;
+            Advance();
+        }
+
+        public void Skip(int count)
+        {
+            for (int i = 0; i < count; i++) { Skip(); }
         }
 
         public IEnumerable<T> Next(int count)
@@ -73,6 +83,12 @@ namespace Streams
                 result.Add(Next());
             }
             return result;
+        }
+
+        private void Advance()
+        {
+            atEnd = !source.MoveNext();
+            position++;
         }
     }
 }

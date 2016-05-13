@@ -145,5 +145,30 @@ namespace StreamsTest
             stream.Next(5); // Discard the first half
             Assert.IsTrue(stream.Next(10).SequenceEqual(new int[5] { 6, 7, 8, 9, 10 }));
         }
+
+        [TestMethod]
+        public void SkipAllowsMeToQuicklyDiscardElements()
+        {
+            Stream<int> stream = new Stream<int>(Enumerable.Range(1, 10));
+            stream.Skip(5); // Discard the first half
+            Assert.AreEqual(5, stream.Position);
+            Assert.AreEqual(6, stream.Next());
+        }
+
+        [TestMethod]
+        public void MovingOverTheEndShouldNotIncrementThePosition()
+        {
+            Stream<int> stream = new Stream<int>(Enumerable.Range(1, 3));
+            stream.Next(10);
+            Assert.AreEqual(3, stream.Position);
+        }
+
+        [TestMethod]
+        public void SkippingOverTheEndShouldNotIncrementThePosition()
+        {
+            Stream<int> stream = new Stream<int>(Enumerable.Range(1, 3));
+            stream.Skip(10);
+            Assert.AreEqual(3, stream.Position);
+        }
     }
 }
