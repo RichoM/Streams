@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Streams</id>
+    <id>RichoM.Streams</id>
     <version>$version$</version>
     <title>Streams</title>
     <authors>Ricardo Moran</authors>
