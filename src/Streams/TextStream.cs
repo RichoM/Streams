@@ -24,12 +24,21 @@ namespace Streams
 
         private static IEnumerable<char> AsEnumerable(System.IO.TextReader reader)
         {
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            char[] buffer = new char[4096];
+            bool atEnd = false;
+            while (!atEnd)
             {
-                foreach (char c in line)
+                int charsRead = reader.Read(buffer, 0, buffer.Length);
+                if (charsRead <= 0)
                 {
-                    yield return c;
+                    atEnd = true;
+                }
+                else
+                {
+                    for (int i = 0; i < charsRead; i++)
+                    {
+                        yield return buffer[i];
+                    }
                 }
             }
         }

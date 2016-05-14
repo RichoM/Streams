@@ -64,5 +64,17 @@ namespace StreamsTest
                 Assert.AreEqual("ABC", stream.Next(3));
             }
         }
+
+        [TestMethod]
+        public void TextStreamsIncludeNewLineCharacters()
+        {
+            using(TextStream stream = new TextStream("ABC\nDEF\r\nGHI"))
+            {
+                stream.Skip(3);
+                Assert.AreEqual('\n', stream.Next());
+                stream.Skip(3);
+                Assert.AreEqual("\r\n", stream.Next(2));
+            }
+        }
     }
 }
