@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Streams</id>
+    <version>$version$</version>
+    <title>Streams</title>
+    <authors>Ricardo Moran</authors>
+    <owners>Ricardo Moran</owners>
+    <licenseUrl>https://github.com/RichoM/Streams/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/RichoM/Streams</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package description</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright &#x00A9; Ricardo Moran</copyright>
+    <tags>streams smalltalk</tags>
+  </metadata>
+  <files>
+	<file src="Streams\bin\$configuration$\Streams.dll" target="lib\net40\" />
+  </files>
+</package>
