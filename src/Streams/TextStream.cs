@@ -10,7 +10,7 @@ namespace Streams
     {
         private System.IO.TextReader reader;
 
-        public TextStream(System.IO.TextReader reader) : base(AsEnumerable(reader))
+        public TextStream(System.IO.TextReader reader) : base(reader.AsEnumerable())
         {
             this.reader = reader;
         }
@@ -21,28 +21,7 @@ namespace Streams
 
         public TextStream(string source) : this(new System.IO.StringReader(source))
         {}
-
-        private static IEnumerable<char> AsEnumerable(System.IO.TextReader reader)
-        {
-            char[] buffer = new char[4096];
-            bool atEnd = false;
-            while (!atEnd)
-            {
-                int charsRead = reader.Read(buffer, 0, buffer.Length);
-                if (charsRead <= 0)
-                {
-                    atEnd = true;
-                }
-                else
-                {
-                    for (int i = 0; i < charsRead; i++)
-                    {
-                        yield return buffer[i];
-                    }
-                }
-            }
-        }
-
+        
         public new string UpToEnd()
         {
             return new string(base.UpToEnd().ToArray());
