@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Streams
 {
-    public class Stream<T>
+    public class Stream<T> : IDisposable
     {
         private IEnumerator<T> source;
         private int position = -1;
@@ -89,6 +89,19 @@ namespace Streams
         {
             atEnd = !source.MoveNext();
             position++;
+        }
+        
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                source.Dispose();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }

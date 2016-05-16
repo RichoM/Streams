@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Streams
 {
-    public class TextStream : Stream<char>, IDisposable
+    public class TextStream : Stream<char>
     {
         private System.IO.TextReader reader;
 
@@ -48,9 +48,13 @@ namespace Streams
             return new string(base.Next(count).ToArray());
         }
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            if (reader != null) { reader.Dispose(); }
+            if (disposing)
+            {
+                if (reader != null) { reader.Dispose(); }
+            }
+            base.Dispose(disposing);
         }
     }
 }
