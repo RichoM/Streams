@@ -8,6 +8,11 @@ namespace Streams
 {
     public static class StreamExtensions
     {
+        /// <summary>
+        /// Converts a <c>System.IO.TextReader</c> in an <c>IEnumerable<char></c>
+        /// </summary>
+        /// <param name="reader">The <c>System.IO.TextReader</c> that will be converted.</param>
+        /// <returns>An <c>IEnumerable<char></c> that consumes <paramref name="reader"/>.</returns>
         public static IEnumerable<char> AsEnumerable(this System.IO.TextReader reader)
         {
             char[] buffer = new char[4096];
