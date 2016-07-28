@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Streams
 {
+    /// <summary>
+    /// A <c>Stream</c> is a sequence of objects, similar to an <c>IEnumerator</c>. The big difference is that while the 
+    /// enumerator points to an element, a stream contains a pointer between elements. Also, the interface differs quite a bit.
+    /// </summary>
+    /// <typeparam name="T">The type of elements this stream will contain.</typeparam>
     public class Stream<T> : IDisposable
     {
         private IEnumerator<T> source;
