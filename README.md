@@ -1,6 +1,8 @@
 # Streams
 ######*Smalltalk-like streams implemented in C#*
 
+[![richom MyGet Build Status](https://www.myget.org/BuildSource/Badge/richom?identifier=5562929b-7b9a-4852-8e01-b1b1d601935f)](https://www.myget.org/)
+
 A Stream is a sequence of objects, similar to an IEnumerator. The big difference is that while the enumerator points to an element, a stream contains a pointer **between** elements. Also, the interface differs quite a bit.
 
 You can create a Stream by wrapping an IEnumerable, like:
