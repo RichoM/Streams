@@ -48,7 +48,7 @@ namespace Streams
             return new string(base.Next(count).ToArray());
         }
 
-        public string NextLine()
+        public string UpToNewLine()
         {
             Func<char, bool> isNewLine = chr => Equals(chr, '\n') || Equals(chr, '\r');
             string line = UpTo(isNewLine);

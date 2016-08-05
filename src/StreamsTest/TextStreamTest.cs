@@ -78,13 +78,13 @@ namespace StreamsTest
         }
 
         [TestMethod]
-        public void TextStreamsNextLineWorksWithAnyNewLineCharacters()
+        public void TextStreamsUpToNewLineWorksWithAnyNewLineCharacters()
         {
             using (TextStream stream = new TextStream("ABC\nDEF\r\nGHI"))
             {
-                Assert.AreEqual("ABC", stream.NextLine());
-                Assert.AreEqual("DEF", stream.NextLine());
-                Assert.AreEqual("GHI", stream.NextLine());
+                Assert.AreEqual("ABC", stream.UpToNewLine());
+                Assert.AreEqual("DEF", stream.UpToNewLine());
+                Assert.AreEqual("GHI", stream.UpToNewLine());
                 Assert.IsTrue(stream.AtEnd);
             }
         }
