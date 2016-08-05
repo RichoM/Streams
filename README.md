@@ -1,7 +1,7 @@
 # dotnet.Streams
 ######*Smalltalk-like streams implemented in C#*
 
-[![richom MyGet Build Status](https://www.myget.org/BuildSource/Badge/richom?identifier=5562929b-7b9a-4852-8e01-b1b1d601935f)](https://www.myget.org/)
+[![richom MyGet Build Status](https://www.myget.org/BuildSource/Badge/richom?identifier=b35104d0-8fb5-4d6e-914c-deec31abdab3)](https://www.myget.org/)
 
 A Stream is a sequence of objects, similar to an IEnumerator. The big difference is that while the enumerator points to an element, a stream contains a pointer **between** elements. Also, the interface differs quite a bit.
 
