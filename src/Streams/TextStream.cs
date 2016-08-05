@@ -48,6 +48,14 @@ namespace Streams
             return new string(base.Next(count).ToArray());
         }
 
+        public string NextLine()
+        {
+            Func<char, bool> isNewLine = chr => Equals(chr, '\n') || Equals(chr, '\r');
+            string line = UpTo(isNewLine);
+            if (isNewLine(Peek())) Skip(); // In case of \r\n we also want to skip the \n
+            return line;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
